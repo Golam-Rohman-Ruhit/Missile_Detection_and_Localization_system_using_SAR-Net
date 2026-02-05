@@ -33,7 +33,7 @@ SAR-Net integrates a unique **Spatial Attention Module (SAM)** into residual blo
 
 > [!NOTE]
 > **Architecture Diagram Placeholder**
-> ![SAR-Net Architecture Schematic](image_b02fa2.jpg)
+> <img width="410" height="1422" alt="Image" src="https://github.com/user-attachments/assets/48f3a5c0-6d1d-45c2-a676-0b17c8dd7672" />
 > *Figure 1: Proposed SAR-Net architecture featuring Residual Blocks and SAM.*
 
 ---
