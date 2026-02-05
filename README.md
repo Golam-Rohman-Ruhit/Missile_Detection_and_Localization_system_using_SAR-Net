@@ -65,6 +65,8 @@ SAR-Net is measured side-by-side with classic methods across 1,000 diverse test 
 | **Speed** | Slow (Sequential scans) | **Real-time (Milliseconds)** |
 | **Low SNR** | High failure rate | **Attention-driven robustness** |
 
+<img width="691" height="205" alt="Image" src="https://github.com/user-attachments/assets/71f759ae-cf31-4cfe-a992-4941f56b2fdb" />
+
 ---
 
 ## Ⅵ. Anticipated Challenges (Ablation Study)
