@@ -1,82 +1,109 @@
-# Script to generate a professional README.md for SAR-Net Missile Detection
-readme_text = """# Missile Streak Detection and Localization System Using SAR-Net
+import os
 
-[cite_start]This project addresses the critical challenge of real-time detection and localization of ballistic missiles using optical sensors[cite: 3]. [cite_start]The system identifies dim, short-lived missile streaks within images distorted by atmospheric interference, Poisson sensor noise, and background clutter[cite: 4, 5].
+# Professional README generator for SAR-Net Project
+readme_content = r"""# Missile Streak Detection and Localization System Using SAR-Net [cite: 1]
+
+This project implements **SAR-Net (Spatial Attention Residual Network)** to address the challenge of spotting and pinpointing ballistic missiles in real-time via optical sensors[cite: 3, 8].
 
 ---
 
-## 🚀 Key Features
-* [cite_start]**Deep Learning Approach**: Utilizes **SAR-Net (Spatial Attention Residual Network)** to learn patterns directly from data rather than relying on hand-crafted statistics[cite: 8, 9].
-* [cite_start]**Denoising & Detection**: Integrates spatial attention to enhance "streak" regions and suppress irrelevant background noise in a single unified step[cite: 96, 122].
-* [cite_start]**Realistic Flight Modeling**: Trained on **Bezier curves** to capture curved flight paths influenced by gravity and air resistance[cite: 17, 83].
-* [cite_start]**High-Speed Inference**: Optimized for millisecond-level processing (< 10 ms per prediction) on limited-power hardware[cite: 25, 150].
+## 🚀 Project Overview
+Missiles appear as dim, short-lived lines on Focal Plane Arrays, often obscured by heavy distortions from atmospheric interference, Poisson sensor noise, and background clutter[cite: 4, 5]. While conventional techniques like Maximum Likelihood Estimation (MLE) or GLRT are mathematically solid, they are computationally expensive and fail under weak signal conditions[cite: 6, 7].
+
+SAR-Net tackles these issues by:
+* **Learning Directly from Data**: Moving away from hand-crafted statistics to automated pattern recognition[cite: 9].
+* **Selective Focus**: Using a **Spatial Attention Module (SAM)** to identify streak regions and downweight noise[cite: 11].
+* **Deep Signal Retention**: Utilizing residual blocks to enable deep learning without losing signal strength for weak objects[cite: 13].
 
 ---
 
 ## 🏗️ System Architecture
-[cite_start]The SAR-Net model consists of three primary components designed for low-SNR environments[cite: 87, 89]:
+The model is an end-to-end framework that performs simultaneous classification and coordinate regression[cite: 88, 214].
 
 | Component | Description |
 | :--- | :--- |
-| **Residual Feature Extraction** | [cite_start]Uses skip connections to keep weak signals visible across deep layers[cite: 91]. |
-| **Spatial Attention Module (SAM)** | [cite_start]Dynamically adjusts pixel weights to boost streak signals and reduce interference[cite: 94, 96]. |
-| **Dual-Head Prediction** | [cite_start]Features a **Classification Head** (threat detection) and a **Regression Head** (path coordinate prediction)[cite: 100, 101]. |
+| **Residual Feature Extraction** | Captures detailed patterns while maintaining gradient flow for weak signals[cite: 91]. |
+| **Spatial Attention Mechanism** | Generates pixel-specific weights to boost streak visibility and suppress clutter[cite: 95, 96]. |
+| **Dual-Head Prediction** | Includes a **Classification Head** (threat existence) and a **Regression Head** (path positions)[cite: 100, 101]. |
+
+
 
 ---
 
-## 📊 Performance and Evaluation
-[cite_start]The system is trained over **20 epochs** using the **Adam optimizer** with a multi-objective loss function (Binary Cross-Entropy and Mean Squared Error)[cite: 18, 113, 115].
+## 📈 Performance & Results
+The system is optimized using a combined loss (Binary Cross-Entropy for detection and MSE for motion prediction)[cite: 18, 106].
 
-### Training Results
-[cite_start]The model demonstrates rapid convergence in detection accuracy and total loss reduction[cite: 132].
+### Training Metrics
+SAR-Net demonstrates rapid convergence, reaching high detection accuracy within 20 epochs[cite: 115, 132].
 
-![Training Metrics](results/training_metrics.png)
-> [cite_start]**Figure 1**: Training metrics showing convergence of Detection Accuracy and Total Loss[cite: 132].
+![Training Metrics](training_metrics.png)
+> **Figure 1**: Convergence of Detection Accuracy and Total Loss over training[cite: 132].
 
-### Visual Ground Truth Verification
-[cite_start]The model accurately targets the streak pattern despite heavy noise distortions[cite: 135].
+### Qualitative Verification
+Visual overlays confirm that the model accurately targets the streak pattern rather than scattered noise[cite: 135].
 
-![Visual Evaluation](results/final_detection_output.png)
-> [cite_start]**Figure 2**: Visual evaluation showing the predicted path (Red) vs. actual Ground Truth (Green)[cite: 136].
-
----
-
-## 🧪 Experiments and Documentation
-This section contains detailed experimental reports. **[Add your .doc report files here]**
-
-### Experiment 1: Comparative Analysis (SAR-Net vs. GLRT)
-[cite_start]A Monte Carlo simulation comparing SAR-Net against the traditional Generalized Likelihood Ratio Test across noise levels from 2 dB to 15 dB[cite: 161, 165].
-> **[INSERT EXPERIMENT 1 REPORT (.DOC) HERE]**
+![Visual Evaluation](final_detection_output.png)
+> **Figure 2**: Visual Evaluation—Green lines represent Ground Truth; Red lines represent SAR-Net predictions[cite: 136].
 
 ---
 
-### Experiment 2: Ablation Study of Spatial Attention
-[cite_start]Evaluating the performance contribution of the Spatial Attention Module by comparing it against a baseline ResNet structure[cite: 151, 152].
-> **[INSERT EXPERIMENT 2 REPORT (.DOC) HERE]**
+## 🔬 Literature Comparison
+SAR-Net sits in a unique niche compared to existing literature[cite: 253]:
+
+| Feature | Balci & Tekalp [cite: 171] | Zhang et al. [cite: 202] | Virtanen et al. [cite: 187] | **SAR-Net (This Work)** |
+| :--- | :--- | :--- | :--- | :--- |
+| **Target Type** | Linear Streaks | Static IR Blobs | Linear Debris | **Non-Linear (Bezier)** [cite: 252] |
+| **Methodology** | Two-Stage | Attention Seg. | Standard CNN | **End-to-End Attn-ResNet** [cite: 252] |
+| **Noise Handling** | Denoising Pre-proc. | Contextual Attn. | CNN Learning | **Learned Spatial Attn.** [cite: 252] |
+| **Primary Task** | Detect & Localize | Segmentation | Classification | **Simultaneous Class & Reg** [cite: 252] |
 
 ---
 
-### Experiment 3: Non-Linear Trajectory Regression
-[cite_start]Analysis of the system's ability to estimate curved motion paths compared to simplified linear models[cite: 124, 126].
-> **[INSERT EXPERIMENT 3 REPORT (.DOC) HERE]**
+## 🧪 Experiments & Reports
+Below are the experimental summaries. **[INSERT YOUR .DOC FILES IN THESE SPACES]**
+
+### Experiment 1: SNR Robustness Study
+Analysis of detection accuracy across noise intensities ranging from 2 dB to 15 dB[cite: 165].
+> **[UPLOAD: Experiment_1_SNR_Report.doc]**
 
 ---
 
-## 🛠️ Environment & Tools
-* [cite_start]**Language**: Python 3.10 [cite: 144]
-* [cite_start]**Framework**: TensorFlow 2.x with Keras [cite: 144]
-* [cite_start]**Simulation**: OpenCV for physics-based path and noise rendering [cite: 145]
-* [cite_start]**Hardware**: Recommended NVIDIA GPU (T4/RTX) for millisecond latency [cite: 148, 150]
+### Experiment 2: Ablation Study
+A comparative test between a standard ResNet (No Attention) and SAR-Net to quantify the gain from the Spatial Attention Module[cite: 151, 157].
+> **[UPLOAD: Experiment_2_Ablation_Report.doc]**
 
 ---
 
-## 📚 Core References
-* [cite_start][1] H. E. Balci and A. M. Tekalp, "Machine learning for missile streak detection and localization," IEEE ICIP, 2021[cite: 259].
-* [cite_start][2] J. Virtanen et al., "Deep learning for space debris streak detection in optical images," AMOS, 2019[cite: 260].
-* [cite_start][3] T. Zhang et al., "Attention-guided pyramid context networks for infrared small target detection," IEEE TAES, 2021[cite: 261, 262].
+### Experiment 3: Non-Linear Regression Accuracy
+Evaluating the model's ability to predict curved paths simulated via Bezier curves against linear assumptions[cite: 83, 126].
+> **[UPLOAD: Experiment_3_Bezier_Trajectory_Report.doc]**
+
+---
+
+## 🛠️ Environment & Hardware
+* **Software**: Python 3.10, TensorFlow 2.x, and OpenCV[cite: 144, 145].
+* **Input Scale**: Sensor images scaled (0 to 1); coordinates adjusted for $64 \times 64$ resolution[cite: 146, 147].
+* **Speed**: Targets **< 10 ms** inference time on NVIDIA T4/RTX GPUs[cite: 150].
+
+---
+
+## 📚 References
+* [1] H. E. Balci and A. M. Tekalp, "Machine learning for missile streak detection and localization," IEEE ICIP, 2021[cite: 259].
+* [2] J. Virtanen et al., "Deep learning for space debris streak detection in optical images," AMOS, 2019[cite: 260].
+* [3] T. Zhang et al., "Attention-guided pyramid context networks for infrared small target detection," IEEE TAES, 2021[cite: 261].
+* [4] Y. Dai et al., "Asymmetric contextual modulation for infrared small target detection," WACV, 2021[cite: 263].
+* [5] K. He et al., "Deep residual learning for image recognition," CVPR, 2016[cite: 266].
 """
 
-with open("README.md", "w", encoding="utf-8") as f:
-    f.write(readme_text)
+def generate_readme():
+    filename = "README.md"
+    try:
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(readme_content)
+        print(f"Successfully generated {filename}!")
+        print("Now you can push this to GitHub to see the organized report.")
+    except Exception as e:
+        print(f"Error creating file: {e}")
 
-print("README.md successfully created!")
+if __name__ == "__main__":
+    generate_readme()
