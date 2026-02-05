@@ -32,7 +32,8 @@ SAR-Net integrates a unique **Spatial Attention Module (SAM)** into residual blo
     * **Regression Head:** Forecasts smooth position vectors for the trajectory.
 
 > [!NOTE]
-> **Architecture Diagram Placeholder**
+> **Architecture Diagram **
+
 > <img width="410" height="1422" alt="Image" src="https://github.com/user-attachments/assets/48f3a5c0-6d1d-45c2-a676-0b17c8dd7672" />
 
 
